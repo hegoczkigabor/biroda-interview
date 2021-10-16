@@ -13,10 +13,10 @@ const getWikipediaOverviewByMovieTitle = async (title: string) => {
   return details.extract;
 };
 
-const findWikipediaPageUrlByMovieTitle = (title: string) =>
+const getWikipediaPageUrlByMovieTitle = (title: string) =>
   `https://en.wikipedia.org/wiki/${transformTitle(title)}`;
 
 export default {
   getWikipediaOverviewByMovieTitle,
-  findWikipediaPageUrlByMovieTitle,
+  getWikipediaPageUrlByMovieTitle,
 };

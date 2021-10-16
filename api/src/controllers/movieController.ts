@@ -7,7 +7,7 @@ import { TMDB_API_KEY, TMDB_BASE_URL } from "../config/config";
 
 const { mapMovieGenreIdsToLabels } = genreController;
 const { getImdbMoviePageUrlById } = imdbController;
-const { findWikipediaPageUrlByMovieTitle, getWikipediaOverviewByMovieTitle } =
+const { getWikipediaPageUrlByMovieTitle, getWikipediaOverviewByMovieTitle } =
   wikipediaController;
 
 const getMoviesByTitle = async (title: string) => {
@@ -50,7 +50,7 @@ const getMovieDetailsByMovieId = async (id: string) => {
     year: movie.release_date,
     score: movie.vote_average,
     imdbPageUrl: getImdbMoviePageUrlById(movie.imdb_id),
-    wikiPageUrl: findWikipediaPageUrlByMovieTitle(movie.title),
+    wikiPageUrl: getWikipediaPageUrlByMovieTitle(movie.title),
     overview: await getWikipediaOverviewByMovieTitle(movie.title),
   };
 };
