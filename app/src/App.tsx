@@ -1,4 +1,4 @@
-import { MovieListPage } from "pages/MovieListPage/MovieListPage";
+import { MovieListPage } from "pages/MovieListPage";
 import "./styles.css";
 
 const App = () => <MovieListPage />;
