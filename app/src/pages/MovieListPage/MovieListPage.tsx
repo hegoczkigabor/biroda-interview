@@ -11,18 +11,19 @@ import {
   Main,
   Header,
   HeaderContent,
-  MainContent
+  MainContent,
+  MessageContainer,
 } from "./MovieListPageLayout";
 
 export const MovieListPage = () => {
-  const [movies, setMovies] = useState([]);
+  const [result, setResult] = useState<any>(null);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const findMoviesByTitle = async (title: string) => {
-    const movies =
+    const result =
       title === ""
         ? await MovieService.getPopularMovies()
         : await MovieService.getMoviesByTitle(title);
-    setMovies(movies);
+    setResult(result);
   };
   useEffect(() => {
     findMoviesByTitle("");
@@ -30,7 +31,7 @@ export const MovieListPage = () => {
   return (
     <>
       <MovieDetailsModal
-        movie={selectedMovie}
+        movieId={selectedMovie?.id}
         onClose={() => {
           setSelectedMovie(null);
         }}
@@ -46,10 +47,18 @@ export const MovieListPage = () => {
       </Header>
       <Main>
         <MainContent>
-          <MovieList
-            movies={movies}
-            onSelect={(movie: Movie) => setSelectedMovie(movie)}
-          />
+          {result ? (
+            result.data ? (
+              <MovieList
+                movies={result.data}
+                onSelect={(movie: Movie) => setSelectedMovie(movie)}
+              />
+            ) : (
+              <MessageContainer>{result.error.message}</MessageContainer>
+            )
+          ) : (
+            <MessageContainer>Collecting data...</MessageContainer>
+          )}
         </MainContent>
       </Main>
     </>

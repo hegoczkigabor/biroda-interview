@@ -16,36 +16,37 @@ import {
 } from "./MovieDetailsModalLayout";
 
 export interface MoviedetailsDialogProps {
-  movie: Movie | null;
+  movieId?: string;
   onClose: () => void;
 }
 
 export const MovieDetailsModal = ({
-  movie,
+  movieId,
   onClose,
 }: MoviedetailsDialogProps) => {
   const [visible, setVisible] = useState(false);
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>();
 
   const fetchMovieDetails = async (id: string) => {
-    setVisible(true);
-    setMovieDetails(await MovieService.getMovieDetails(id));
+    const response = await MovieService.getMovieDetails(id);
+    setMovieDetails(response.data);
   };
 
   useEffect(() => {
-    if (movie) {
-      fetchMovieDetails(movie.id);
+    if (movieId) {
+      setVisible(true);
+      fetchMovieDetails(movieId);
     }
-  }, [movie]);
+  }, [movieId]);
 
   return (
     <Modal
       title={movieDetails ? movieDetails.title : "Collecting data..."}
       visible={visible}
       onClose={() => {
-        setMovieDetails(null);
-        setVisible(false);
         onClose();
+        setVisible(false);
+        setMovieDetails(null);
       }}
     >
       {movieDetails ? (

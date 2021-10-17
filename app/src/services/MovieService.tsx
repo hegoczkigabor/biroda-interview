@@ -1,20 +1,24 @@
 const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-const getMoviesByTitle = async (title: string) => {
-  const response = await fetch(
-    `${BASE_URL}/movies/find?title=${title}`
-  );
-  return await response.json();
+const fetchData = async (url: string) => {
+  try {
+    return await (await fetch(url)).json();
+  } catch {
+    return {
+      error: {
+        code: "CONNECTION_REFUSED",
+        message: "Network error. Please try again.",
+      },
+    };
+  }
 };
 
-const getPopularMovies = async () => {
-  const response = await fetch(`${BASE_URL}/movies/popular`);
-  return await response.json();
-};
+const getMoviesByTitle = async (title: string) =>
+  fetchData(`${BASE_URL}/movies/find?title=${title}`);
 
-const getMovieDetails = async (id: string) => {
-  const response = await fetch(`${BASE_URL}/movies/${id}`);
-  return await response.json();
-};
+const getPopularMovies = async () => fetchData(`${BASE_URL}/movies/popular`);
+
+const getMovieDetails = async (id: string) =>
+  fetchData(`${BASE_URL}/movies/${id}`);
 
 export default { getMoviesByTitle, getPopularMovies, getMovieDetails };

@@ -3,7 +3,7 @@ import cors from "cors";
 
 import routes from "./routes";
 import { PORT } from "./config/config";
-import genreController  from "./controllers/genreController";
+import genreController  from "./controllers/genre.controller";
 
 const app = express();
 

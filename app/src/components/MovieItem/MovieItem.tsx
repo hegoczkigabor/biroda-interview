@@ -29,8 +29,8 @@ export const MovieItem: FC<MovieItemProps> = ({ movie, onClick }) => {
       </MovieTitle>
       <MovieScore> Score: {movie.score} </MovieScore>
       <MovieGenre>
-        {movie.genres.slice(0, 2).map((genre) => (
-          <Tag label={genre} />
+        {movie.genres.slice(0, 2).map((genre, index) => (
+          <Tag key={index} label={genre} />
         ))}
       </MovieGenre>
     </MovieItemContainer>

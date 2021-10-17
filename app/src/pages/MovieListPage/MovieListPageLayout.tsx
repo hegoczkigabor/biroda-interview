@@ -32,3 +32,7 @@ export const Main = styled.div`
 export const MainContent = styled.div`
   width: 70%;
 `;
+
+export const MessageContainer = styled.div`
+  color:white;
+`
