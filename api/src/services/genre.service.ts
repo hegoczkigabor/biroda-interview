@@ -6,4 +6,4 @@ const fetchGenres = async () =>
     await axios(`${TMDB_BASE_URL}/genre/movie/list?api_key=${TMDB_API_KEY}`)
   )).data.genres;
 
-  export default { fetchGenres }
+export default { fetchGenres };

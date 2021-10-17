@@ -22,4 +22,8 @@ const fetchMovieDetailsById = async (id: string) => {
   return data;
 };
 
-export default { fetchMoviesByTitle, fetchPopularMovies, fetchMovieDetailsById };
+export default {
+  fetchMoviesByTitle,
+  fetchPopularMovies,
+  fetchMovieDetailsById,
+};
